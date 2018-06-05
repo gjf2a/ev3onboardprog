@@ -6,11 +6,11 @@ import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 
 public class ColorSelector {
-	private ColorBound bound;
+	private HackColorBound bound;
 	private int current;
 	private boolean isMin;
 	
-	public ColorSelector(ColorBound bound) {
+	public ColorSelector(HackColorBound bound) {
 		this.bound = bound;
 		this.isMin = true;
 		this.current = 0;

@@ -5,7 +5,7 @@ import java.io.IOException;
 import edu.hendrix.ev3onboardprog.Util;
 
 public class ColorTracker implements Runnable {
-	private ColorBound filter = new ColorBound();
+	private HackColorBound filter = new HackColorBound();
 	
 	public void run() {
 		try {
