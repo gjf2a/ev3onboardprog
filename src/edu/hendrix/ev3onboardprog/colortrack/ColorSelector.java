@@ -30,14 +30,15 @@ public class ColorSelector {
 	}
 	
 	public void loop() {
+		display();
 		while (Button.ENTER.isUp() && Button.ESCAPE.isUp()) {
-			display();
 			
 			Util.checkAndUse(Button.UP, () -> {
 				if (isMin) {
 					current = (current - 1 + Band.values().length) % Band.values().length;
 				}
 				isMin = !isMin;
+				display();
 			});
 			
 			Util.checkAndUse(Button.DOWN, () -> {
@@ -45,6 +46,7 @@ public class ColorSelector {
 					current = (current + 1) % Band.values().length;
 				}
 				isMin = !isMin;
+				display();
 			});
 			
 			Util.checkAndUse(Button.LEFT, () -> {
@@ -53,6 +55,7 @@ public class ColorSelector {
 				} else {
 					bound.maxDown(getCurrent());
 				}
+				display();
 			});
 			
 			Util.checkAndUse(Button.RIGHT, () -> {
@@ -61,6 +64,7 @@ public class ColorSelector {
 				} else {
 					bound.maxUp(getCurrent());
 				}
+				display();
 			});
 		}
 	}
