@@ -32,4 +32,12 @@ public class Util {
 		while (Button.ESCAPE.isDown() || Button.ENTER.isDown()) {}
 		return prompt.get().isYes();
 	}
+	
+	public static void reportAndQuit(Exception exc) {
+		LCD.clear();
+		LCD.drawString(exc.getMessage(), 0, 0);
+		while (Button.ESCAPE.isDown());
+		while (Button.ESCAPE.isUp());
+		System.exit(1);
+	}
 }

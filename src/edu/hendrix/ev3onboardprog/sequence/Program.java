@@ -45,10 +45,21 @@ public class Program {
 		Move.allStop();
 	}
 	
-	public String toInstrString() {
+	@Override
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		moves.forAll(m -> sb.append(m.rep()));
 		return sb.toString();
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		return this.toString().equals(other.toString());
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.toString().hashCode();
 	}
 	
 	public static Program fromInstrString(String src) {
