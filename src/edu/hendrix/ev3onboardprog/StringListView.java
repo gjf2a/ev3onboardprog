@@ -8,6 +8,11 @@ public class StringListView<T> {
 	private StringList<T> src;
 	private int xOffset = 0, yOffset = 0, selectedRow = 0;
 	
+	public int getXOffset() {return xOffset;}
+	public int getYOffset() {return yOffset;}
+	public int getHighlightedRow() {return selectedRow;}
+	public int getSelected() {return yOffset + selectedRow;}
+	
 	public StringListView(StringList<T> src) {
 		this.src = src;
 	}
@@ -21,14 +26,22 @@ public class StringListView<T> {
 	
 	public void move() {
 		checkAndUse(Button.DOWN, () -> {
-			if (yOffset + ScreenSpot.ROWS < src.size()) {
-				yOffset += 1;
+			if (getSelected() < src.size() - 1) {
+				if (selectedRow < ScreenSpot.ROWS - 1) {
+					selectedRow += 1;
+				} else {
+					yOffset += 1;
+				}
 			}
 		});
 		
 		checkAndUse(Button.UP, () -> {
-			if (yOffset > 0) {
-				yOffset -= 1;
+			if (getSelected() > 0) {
+				if (selectedRow > 0) {
+					selectedRow -= 1;
+				} else {
+					yOffset -= 1;
+				}
 			}
 		});
 		
@@ -45,8 +58,6 @@ public class StringListView<T> {
 		});
 	}
 	
-	public int getSelected() {return selectedRow;}
-	
 	public int firstVisibleRow() {return yOffset;}
 	
 	public int lastVisibleRow() {return Math.min(yOffset + ScreenSpot.ROWS, src.size()) - 1;}
@@ -54,7 +65,10 @@ public class StringListView<T> {
 	public void display() {
 		LCD.clear();
 		for (int i = firstVisibleRow(); i <= lastVisibleRow(); i++) {
-			LCD.drawString(src.get(i).toString().substring(xOffset), 0, i, i == getSelected());
+			String toShow = src.get(i).toString();
+			if (xOffset < toShow.length()) {
+				LCD.drawString(toShow.substring(xOffset), 0, i - firstVisibleRow(), i == getSelected());
+			}
 		}
 	}
 	

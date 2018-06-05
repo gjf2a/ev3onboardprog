@@ -66,15 +66,19 @@ public class Program {
 		Program result = new Program();
 		int i = 0;
 		while (i < src.length()) {
+			boolean found = false;
 			for (Move candidate: Move.values()) {
 				String test = src.substring(i, i + candidate.rep().length());
 				if (test.equals(candidate.rep())) {
 					result.moves.insertBefore(candidate);
 					i += candidate.rep().length();
+					found = true;
 					break;
 				}
 			}
-			throw new IllegalArgumentException("Did not recognize '" + src.charAt(i) + "'");
+			if (!found) {
+				throw new IllegalArgumentException("Did not recognize '" + src.charAt(i) + "'");
+			}
 		}
 		return result;
 	}

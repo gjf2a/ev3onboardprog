@@ -5,11 +5,13 @@ import java.io.FileNotFoundException;
 import edu.hendrix.ev3onboardprog.StringListView;
 import edu.hendrix.ev3onboardprog.Util;
 import lejos.hardware.Button;
+import lejos.hardware.lcd.LCD;
 
 public class PathMaker {
 	public static void main(String[] args) throws FileNotFoundException {
+		LCD.drawString("Loading...", 0, 0);
 		StoredPaths stored = new StoredPaths();
-		Program prog = !stored.isEmpty() && Util.isYes("Use stored program") ? StringListView.selectLoop(stored) : stored.addNew();
+		Program prog = !stored.isEmpty() && Util.isYes("Use stored") ? StringListView.selectLoop(stored) : stored.addNew();
 
 		do {
 			prog.display();
