@@ -1,5 +1,6 @@
 package edu.hendrix.ev3onboardprog;
 
+import lejos.hardware.Button;
 import lejos.hardware.motor.Motor;
 import lejos.hardware.motor.NXTRegulatedMotor;
 
@@ -8,6 +9,8 @@ public enum Move implements Repped {
 	FORWARD {
 		@Override
 		public void shortMove() {
+			Motor.A.setSpeed(500);
+			Motor.D.setSpeed(500);
 			Motor.A.forward();
 			Motor.D.forward();
 		}
@@ -30,6 +33,8 @@ public enum Move implements Repped {
 	LEFT {
 		@Override
 		public void shortMove() {
+			Motor.A.setSpeed(100);
+			Motor.D.setSpeed(100);
 			Motor.D.forward();
 			Motor.A.backward();			
 		}
@@ -52,6 +57,8 @@ public enum Move implements Repped {
 	RIGHT {
 		@Override
 		public void shortMove() {
+			Motor.A.setSpeed(100);
+			Motor.D.setSpeed(100);
 			Motor.A.forward();
 			Motor.D.backward();
 		}
@@ -87,7 +94,7 @@ public enum Move implements Repped {
 	public void longMove() {
 		trackedMotor().resetTachoCount();
 		shortMove();
-		while (trackedMotor().getTachoCount() < moveDistance()) {}
+		while (trackedMotor().getTachoCount() < moveDistance() && Button.ESCAPE.isUp()) {}
 	}
 	
 	public static void allStop() {
@@ -95,6 +102,6 @@ public enum Move implements Repped {
 		Motor.D.stop();
 	}
 	
-	public static final int FORWARD_COUNT = 215; // about 10 cm
-	public static final int TURN_COUNT = 100; // about 45 degrees
+	public static final int FORWARD_COUNT = 655; // about 1 foot
+	public static final int TURN_COUNT = 98; // about 45 degrees
 }

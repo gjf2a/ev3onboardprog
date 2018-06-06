@@ -3,15 +3,16 @@ package edu.hendrix.ev3onboardprog.colortrack;
 import java.io.IOException;
 
 import edu.hendrix.ev3onboardprog.Util;
+import edu.hendrix.ev3onboardprog.vision.RGB;
 import edu.hendrix.ev3onboardprog.vision.YUVBand;
 
-public class ColorTracker implements Runnable {
-	private YUVColorBound filter = new YUVColorBound(true);
+public class RGBColorTracker2 implements Runnable {
+	private RGBColorBound2 filter = new RGBColorBound2(true);
 	
 	public void run() {
 		try {
 			do {
-				ColorSelector<YUVBand> selector = new ColorSelector<>(filter, YUVBand.class);
+				ColorSelector<RGB> selector = new ColorSelector<>(filter, RGB.class);
 				selector.loop();
 				if (Util.isYes("Check color")) {
 					ShowFilter tracker = new ShowFilter(filter);
@@ -28,6 +29,6 @@ public class ColorTracker implements Runnable {
 	}
 	
 	public static void main(String[] args) {
-		new ColorTracker().run();
+		new RGBColorTracker2().run();
 	}
 }

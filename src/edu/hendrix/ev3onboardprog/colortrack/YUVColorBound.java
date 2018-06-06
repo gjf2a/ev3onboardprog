@@ -1,10 +1,9 @@
 package edu.hendrix.ev3onboardprog.colortrack;
 
-import edu.hendrix.ev3onboardprog.Logger;
 import edu.hendrix.ev3onboardprog.vision.YUVBand;
 import lejos.hardware.video.YUYVImage;
 
-public class YUVColorBound extends MinMaxBound<YUVBand> {
+public class YUVColorBound extends MinMaxBound<YUVBand> implements ColorBound {
 	private int yMin = 0, yMax = MAX, uMin = 0, uMax = MAX, vMin = 0, vMax = MAX;
 	
 	public YUVColorBound(boolean inside) {
@@ -19,7 +18,7 @@ public class YUVColorBound extends MinMaxBound<YUVBand> {
 		this.uMax = uMax;
 		this.vMin = vMin;
 		this.vMax = vMax;
-		Logger.EV3Log.format("Y: (%d,%d) U: (%d,%d) V: (%d,%d)", yMin, yMax, uMin, uMax, vMin, vMax);
+		//Logger.EV3Log.format("Y: (%d,%d) U: (%d,%d) V: (%d,%d)", yMin, yMax, uMin, uMax, vMin, vMax);
 	}
 	
 	public final static int INCR = 5;

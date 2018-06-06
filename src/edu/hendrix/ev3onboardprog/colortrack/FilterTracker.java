@@ -9,7 +9,7 @@ import edu.hendrix.ev3onboardprog.vision.Point;
 import lejos.hardware.video.YUYVImage;
 
 public class FilterTracker extends BasicVisionBot {
-	private YUVColorBound filter;
+	private ColorBound filter;
 	
 	public final static double STRAIGHT_FRACTION = 0.20;
 	public final static double TURN_FRACTION = (1.0 - STRAIGHT_FRACTION) / 2;
@@ -17,7 +17,7 @@ public class FilterTracker extends BasicVisionBot {
 	public final static int GO_LEFT = TURN_PIXELS;
 	public final static int GO_RIGHT = BasicVisionBot.WIDTH - TURN_PIXELS;
 
-	public FilterTracker(YUVColorBound filter) throws IOException {
+	public FilterTracker(ColorBound filter) throws IOException {
 		super();
 		this.filter = filter;
 	}

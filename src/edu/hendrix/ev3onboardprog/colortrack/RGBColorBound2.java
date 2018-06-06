@@ -3,7 +3,7 @@ package edu.hendrix.ev3onboardprog.colortrack;
 import edu.hendrix.ev3onboardprog.vision.RGB;
 import lejos.hardware.video.YUYVImage;
 
-public class RGBColorBound2 extends MinMaxBound<RGB> {
+public class RGBColorBound2 extends MinMaxBound<RGB> implements ColorBound {
 	public static final int MAX = 0xFF;
 	
 	public static int clamp(int value) {

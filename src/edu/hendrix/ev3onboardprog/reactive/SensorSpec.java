@@ -50,7 +50,6 @@ public class SensorSpec extends Spec {
 	@Override
 	public SensorRunner makeRunner(Port p) {
 		DoublePredicate pred = op.makePred(sensor.targets()[testValueIndex]);
-		//Logger.EV3Log.format("SensorSpec pred: %s", pred);
 		return sensor.getSensorObject(p, pred);
 	}
 

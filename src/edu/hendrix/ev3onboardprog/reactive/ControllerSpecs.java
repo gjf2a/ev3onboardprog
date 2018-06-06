@@ -58,7 +58,11 @@ public class ControllerSpecs {
 	public Controller makeController() {
 		Controller c = new Controller();
 		for (int i = 0; i < specs.length; i++) {
-			c.add(specs[i].makeRunner(ports[i]), specs[i].action());
+			try {
+				c.add(specs[i].makeRunner(ports[i]), specs[i].action());
+			} catch (IllegalArgumentException exc) {
+				throw new IllegalArgumentException(String.format("Sensor S%d wrong", i + 1));
+			}
 		}
 		return c;
 	}

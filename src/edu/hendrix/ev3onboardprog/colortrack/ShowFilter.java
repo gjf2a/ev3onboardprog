@@ -7,9 +7,9 @@ import edu.hendrix.ev3onboardprog.vision.BinaryImage;
 import lejos.hardware.video.YUYVImage;
 
 public class ShowFilter extends BasicVisionBot {
-	private YUVColorBound filter;
+	private ColorBound filter;
 
-	public ShowFilter(YUVColorBound filter) throws IOException {
+	public ShowFilter(ColorBound filter) throws IOException {
 		super();
 		this.filter = filter;
 	}
@@ -19,5 +19,4 @@ public class ShowFilter extends BasicVisionBot {
 		BinaryImage bin = new BinaryImage(img, filter);
 		bin.draw();
 	}
-
 }

@@ -23,7 +23,7 @@ public class Controller implements Runnable {
 	@Override
 	public void run() {
 		for (int i = 0; i < size(); i++) {
-			Logger.EV3Log.format("Sensor %d", i);
+			//Logger.EV3Log.format("Sensor %d", i);
 			if (sensors.get(i).matches()) {
 				Move action = actions.get(i);
 				action.shortMove();

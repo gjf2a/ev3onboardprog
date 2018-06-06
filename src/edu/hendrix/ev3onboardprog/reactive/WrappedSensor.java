@@ -28,7 +28,7 @@ public class WrappedSensor implements SensorRunner {
 	}
 	
 	public boolean matches() {
-		Logger.EV3Log.format("test: %s", test);
+		//Logger.EV3Log.format("test: %s", test);
 		return test.test(sense());
 	}
 }

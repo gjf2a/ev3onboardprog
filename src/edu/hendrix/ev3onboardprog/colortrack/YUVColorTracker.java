@@ -3,22 +3,22 @@ package edu.hendrix.ev3onboardprog.colortrack;
 import java.io.IOException;
 
 import edu.hendrix.ev3onboardprog.Util;
-import edu.hendrix.ev3onboardprog.vision.RGB;
+import edu.hendrix.ev3onboardprog.vision.YUVBand;
 
-public class RGBColorTracker implements Runnable {
-	private RGBColorBound1 filter = new RGBColorBound1(true);
+public class YUVColorTracker implements Runnable {
+	private YUVColorBound filter = new YUVColorBound(true);
 	
 	public void run() {
 		try {
 			do {
-				ColorSelector<RGB> selector = new ColorSelector<>(filter, RGB.class);
+				ColorSelector<YUVBand> selector = new ColorSelector<>(filter, YUVBand.class);
 				selector.loop();
 				if (Util.isYes("Check color")) {
-					ShowFilter tracker = new ShowFilter(filter.makeYUV());
+					ShowFilter tracker = new ShowFilter(filter);
 					tracker.run();
 				}
 				if (Util.isYes("Run robot")) {
-					FilterTracker tracker = new FilterTracker(filter.makeYUV());
+					FilterTracker tracker = new FilterTracker(filter);
 					tracker.run();
 				}
 			} while (Util.isYes("Try again"));
@@ -28,6 +28,6 @@ public class RGBColorTracker implements Runnable {
 	}
 	
 	public static void main(String[] args) {
-		new RGBColorTracker().run();
+		new YUVColorTracker().run();
 	}
 }
