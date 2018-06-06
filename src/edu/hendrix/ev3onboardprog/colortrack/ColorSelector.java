@@ -5,25 +5,27 @@ import edu.hendrix.ev3onboardprog.vision.Band;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 
-public class ColorSelector {
-	private HackColorBound bound;
+public class ColorSelector<E extends Enum<E>> {
+	private MinMaxBound<E> bound;
+	private Class<E> band;
 	private int current;
 	private boolean isMin;
 	
-	public ColorSelector(HackColorBound bound) {
+	public ColorSelector(MinMaxBound<E> bound, Class<E> band) {
 		this.bound = bound;
+		this.band = band;
 		this.isMin = true;
 		this.current = 0;
 	}
 	
-	public Band getCurrent() {
-		return Band.values()[current];
+	public E getCurrent() {
+		return band.getEnumConstants()[current];
 	}
 	
 	public void display() {
 		LCD.clear();
 		for (int i = 0; i < Band.values().length; i++) {
-			Band b = Band.values()[i];
+			E b = band.getEnumConstants()[i];
 			LCD.drawString(b + ":" + bound.getMin(b), 0, i * 2, current == i && isMin);
 			LCD.drawString(b + ":" + bound.getMax(b), 0, i * 2 + 1, current == i && !isMin);
 		}

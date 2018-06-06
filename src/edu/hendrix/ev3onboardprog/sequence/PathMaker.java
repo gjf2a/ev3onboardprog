@@ -22,7 +22,9 @@ public class PathMaker {
 				prog.checkAndUse(Button.DOWN,  () -> prog.delete());
 				prog.checkAndUse(Button.ENTER, () -> prog.addMove());
 			}
-			prog.execute();
+			if (Util.isYes("Run program")) {
+				prog.execute();
+			}
 		} while (Util.isYes("Try again"));
 		
 		if (Util.isYes("Save program")) {

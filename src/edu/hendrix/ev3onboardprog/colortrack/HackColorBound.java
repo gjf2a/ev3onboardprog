@@ -3,10 +3,22 @@ package edu.hendrix.ev3onboardprog.colortrack;
 import edu.hendrix.ev3onboardprog.vision.Band;
 import lejos.hardware.video.YUYVImage;
 
-public class HackColorBound {
+public class HackColorBound extends MinMaxBound<Band> {
 	private int yMin = 0, yMax = MAX, uMin = 0, uMax = MAX, vMin = 0, vMax = MAX;
 	
-	public HackColorBound() {}
+	public HackColorBound(boolean inside) {
+		super(inside, INCR, MAX);
+	}
+	
+	public HackColorBound(boolean inside, int yMin, int yMax, int uMin, int uMax, int vMin, int vMax) {
+		super(inside, INCR, MAX);
+		this.yMin = yMin;
+		this.yMax = yMax;
+		this.uMin = uMin;
+		this.uMax = uMax;
+		this.vMin = vMin;
+		this.vMax = vMax;
+	}
 	
 	public final static int INCR = 5;
 	public final static int MAX = 0xFF;
@@ -16,25 +28,10 @@ public class HackColorBound {
 		int U = img.getU(x, y) & MAX;
 		int V = img.getV(x, y) & MAX;
 		
-		return yMin <= Y && Y <= yMax && vMin <= V && V <= vMax && uMin <= U && U <= uMax;
+		return isInside() == (yMin <= Y && Y <= yMax && vMin <= V && V <= vMax && uMin <= U && U <= uMax);
 	}
 	
-	private int minPlus(int min, int max) {
-		return Math.min(min + INCR, max);
-	}
-	
-	private int minMinus(int min) {
-		return Math.max(min - INCR, 0);
-	}
-	
-	private int maxPlus(int max) {
-		return Math.min(max + INCR, MAX);
-	}
-	
-	private int maxMinus(int max, int min) {
-		return Math.max(max - INCR, min);
-	}
-	
+	@Override
 	public void minUp(Band b) {
 		switch (b) {
 		case Y: yMin = minPlus(yMin, yMax); break;
@@ -43,6 +40,7 @@ public class HackColorBound {
 		}
 	}
 	
+	@Override
 	public void minDown(Band b) {
 		switch (b) {
 		case Y: yMin = minMinus(yMin); break;
@@ -51,6 +49,7 @@ public class HackColorBound {
 		}		
 	}
 	
+	@Override
 	public void maxUp(Band b) {
 		switch (b) {
 		case Y: yMax = maxPlus(yMax); break;
@@ -59,6 +58,7 @@ public class HackColorBound {
 		}
 	}
 	
+	@Override
 	public void maxDown(Band b) {
 		switch (b) {
 		case Y: yMax = maxMinus(yMax, yMin); break;
@@ -67,6 +67,7 @@ public class HackColorBound {
 		}
 	}
 	
+	@Override
 	public int getMin(Band b) {
 		switch (b) {
 		case Y: return yMin;
@@ -75,6 +76,7 @@ public class HackColorBound {
 		}
 	}
 	
+	@Override
 	public int getMax(Band b) {
 		switch (b) {
 		case Y: return yMax;
