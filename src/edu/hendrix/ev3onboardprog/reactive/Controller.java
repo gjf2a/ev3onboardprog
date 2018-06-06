@@ -2,6 +2,7 @@ package edu.hendrix.ev3onboardprog.reactive;
 
 import java.util.ArrayList;
 
+import edu.hendrix.ev3onboardprog.Logger;
 import edu.hendrix.ev3onboardprog.Move;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
@@ -22,6 +23,7 @@ public class Controller implements Runnable {
 	@Override
 	public void run() {
 		for (int i = 0; i < size(); i++) {
+			Logger.EV3Log.format("Sensor %d", i);
 			if (sensors.get(i).matches()) {
 				Move action = actions.get(i);
 				action.shortMove();

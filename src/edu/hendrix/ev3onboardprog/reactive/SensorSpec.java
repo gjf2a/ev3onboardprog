@@ -1,5 +1,7 @@
 package edu.hendrix.ev3onboardprog.reactive;
 
+import java.util.function.DoublePredicate;
+
 import edu.hendrix.ev3onboardprog.RotateFuncs;
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.port.Port;
@@ -47,7 +49,9 @@ public class SensorSpec extends Spec {
 
 	@Override
 	public SensorRunner makeRunner(Port p) {
-		return sensor.getSensorObject(p, op.makePred(sensor.targets()[testValueIndex]));
+		DoublePredicate pred = op.makePred(sensor.targets()[testValueIndex]);
+		//Logger.EV3Log.format("SensorSpec pred: %s", pred);
+		return sensor.getSensorObject(p, pred);
 	}
 
 	@Override
@@ -77,7 +81,7 @@ public class SensorSpec extends Spec {
 
 	@Override
 	public void lcdShow(int row, int highlight) {
-		LCD.drawString("S" + row, 0, row);
+		LCD.drawString("S" + (row + 1), 0, row);
 		LCD.drawString(action().rep(), 3, row, highlight == 0);
 		LCD.drawString(sensor.rep(), 5, row, highlight == 1);
 		LCD.drawString(op.rep(), 8, row, highlight == 2);

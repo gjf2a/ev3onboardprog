@@ -58,6 +58,7 @@ public enum Sensor implements Repped {
 		@Override
 		public WrappedSensor getSensorObject(Port p, DoublePredicate test) {
 			EV3TouchSensor bumper = new EV3TouchSensor(p);
+			//Logger.EV3Log.format("Sensor.BUMP: test %s", test);
 			return new WrappedSensor(bumper, bumper, test);
 		}
 
