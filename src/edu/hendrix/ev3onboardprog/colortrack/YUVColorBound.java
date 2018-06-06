@@ -3,7 +3,7 @@ package edu.hendrix.ev3onboardprog.colortrack;
 import edu.hendrix.ev3onboardprog.vision.YUVBand;
 import lejos.hardware.video.YUYVImage;
 
-public class YUVColorBound extends MinMaxBound<YUVBand> implements ColorBound {
+public class YUVColorBound extends MinMaxBound<YUVBand> implements PixelFilter {
 	private int yMin = 0, yMax = MAX, uMin = 0, uMax = MAX, vMin = 0, vMax = MAX;
 	
 	public YUVColorBound(boolean inside) {

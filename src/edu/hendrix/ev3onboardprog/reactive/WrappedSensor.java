@@ -1,8 +1,6 @@
 package edu.hendrix.ev3onboardprog.reactive;
 
 import java.util.function.DoublePredicate;
-
-import edu.hendrix.ev3onboardprog.Logger;
 import lejos.hardware.sensor.BaseSensor;
 import lejos.robotics.SampleProvider;
 
@@ -28,7 +26,6 @@ public class WrappedSensor implements SensorRunner {
 	}
 	
 	public boolean matches() {
-		//Logger.EV3Log.format("test: %s", test);
 		return test.test(sense());
 	}
 }

@@ -26,6 +26,8 @@ public class ControllerMaker {
 	
 	public static void execute(ControllerSpecs specs) {
 		try {
+			LCD.clear();
+			LCD.drawString("Starting up...", 0, 0);
 			Controller c = specs.makeController();
 			c.loop();
 		} catch (IllegalArgumentException exc) {

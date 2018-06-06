@@ -5,7 +5,7 @@ import java.io.IOException;
 import edu.hendrix.ev3onboardprog.Util;
 import edu.hendrix.ev3onboardprog.vision.RGB;
 
-public class RGBColorTracker1 implements Runnable {
+public class RGBColorTrackerBad implements Runnable {
 	private RGBColorBound1 filter = new RGBColorBound1(true);
 	
 	public void run() {
@@ -28,6 +28,6 @@ public class RGBColorTracker1 implements Runnable {
 	}
 	
 	public static void main(String[] args) {
-		new RGBColorTracker1().run();
+		new RGBColorTrackerBad().run();
 	}
 }
