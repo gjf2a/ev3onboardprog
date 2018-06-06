@@ -2,14 +2,14 @@ package edu.hendrix.ev3onboardprog.colortrack;
 
 import java.util.EnumMap;
 
-import edu.hendrix.ev3onboardprog.vision.Band;
+import edu.hendrix.ev3onboardprog.vision.YUVBand;
 import lejos.hardware.video.YUYVImage;
 
 public class ColorBound {
-	private EnumMap<Band,Bound> bands = new EnumMap<>(Band.class);
+	private EnumMap<YUVBand,Bound> bands = new EnumMap<>(YUVBand.class);
 	
 	public ColorBound() {
-		for (Band b: Band.values()) {
+		for (YUVBand b: YUVBand.values()) {
 			bands.put(b, new Bound());
 		}
 	}
@@ -18,27 +18,27 @@ public class ColorBound {
 		return bands.entrySet().stream().allMatch(e -> e.getValue().in(e.getKey().get(img, x, y)));
 	}
 	
-	public void minUp(Band b) {
+	public void minUp(YUVBand b) {
 		bands.get(b).minUp();
 	}
 	
-	public void minDown(Band b) {
+	public void minDown(YUVBand b) {
 		bands.get(b).minDown();
 	}
 	
-	public void maxUp(Band b) {
+	public void maxUp(YUVBand b) {
 		bands.get(b).maxUp();
 	}
 	
-	public void maxDown(Band b) {
+	public void maxDown(YUVBand b) {
 		bands.get(b).maxDown();
 	}
 	
-	public int getMin(Band b) {
+	public int getMin(YUVBand b) {
 		return bands.get(b).getMin();
 	}
 	
-	public int getMax(Band b) {
+	public int getMax(YUVBand b) {
 		return bands.get(b).getMax();
 	}
 }

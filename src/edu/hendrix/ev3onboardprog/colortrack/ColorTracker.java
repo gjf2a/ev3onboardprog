@@ -3,15 +3,15 @@ package edu.hendrix.ev3onboardprog.colortrack;
 import java.io.IOException;
 
 import edu.hendrix.ev3onboardprog.Util;
-import edu.hendrix.ev3onboardprog.vision.Band;
+import edu.hendrix.ev3onboardprog.vision.YUVBand;
 
 public class ColorTracker implements Runnable {
-	private HackColorBound filter = new HackColorBound(true);
+	private YUVColorBound filter = new YUVColorBound(true);
 	
 	public void run() {
 		try {
 			do {
-				ColorSelector<Band> selector = new ColorSelector<>(filter, Band.class);
+				ColorSelector<YUVBand> selector = new ColorSelector<>(filter, YUVBand.class);
 				selector.loop();
 				if (Util.isYes("Check color")) {
 					ShowFilter tracker = new ShowFilter(filter);

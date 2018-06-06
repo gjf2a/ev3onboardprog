@@ -2,7 +2,7 @@ package edu.hendrix.ev3onboardprog.vision;
 
 import lejos.hardware.video.YUYVImage;
 
-public enum Band {
+public enum YUVBand {
 	Y {
 		@Override
 		public int get(YUYVImage img, int x, int y) {

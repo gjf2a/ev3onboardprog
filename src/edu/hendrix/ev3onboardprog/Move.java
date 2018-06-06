@@ -3,7 +3,7 @@ package edu.hendrix.ev3onboardprog;
 import lejos.hardware.motor.Motor;
 import lejos.hardware.motor.NXTRegulatedMotor;
 
-public enum Move {
+public enum Move implements Repped {
 	
 	FORWARD {
 		@Override
@@ -73,20 +73,15 @@ public enum Move {
 	};
 	
 	abstract public void shortMove();
-	abstract public String rep();
 	abstract public int moveDistance();
 	abstract public NXTRegulatedMotor trackedMotor();
 	
 	public Move nextChoice() {
-		return advChoice(1);
+		return RotateFuncs.nextChoice(this, Move.values());
 	}
 	
 	public Move prevChoice() {
-		return advChoice(-1);
-	}
-	
-	public Move advChoice(int dir) {
-		return values()[Util.addMod(this.ordinal(), (dir < 0 ? -1 : 1), values().length)];
+		return RotateFuncs.prevChoice(this, Move.values());
 	}
 	
 	public void longMove() {

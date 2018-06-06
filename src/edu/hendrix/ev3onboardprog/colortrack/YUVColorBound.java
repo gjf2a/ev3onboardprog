@@ -1,16 +1,17 @@
 package edu.hendrix.ev3onboardprog.colortrack;
 
-import edu.hendrix.ev3onboardprog.vision.Band;
+import edu.hendrix.ev3onboardprog.Logger;
+import edu.hendrix.ev3onboardprog.vision.YUVBand;
 import lejos.hardware.video.YUYVImage;
 
-public class HackColorBound extends MinMaxBound<Band> {
+public class YUVColorBound extends MinMaxBound<YUVBand> {
 	private int yMin = 0, yMax = MAX, uMin = 0, uMax = MAX, vMin = 0, vMax = MAX;
 	
-	public HackColorBound(boolean inside) {
+	public YUVColorBound(boolean inside) {
 		super(inside, INCR, MAX);
 	}
 	
-	public HackColorBound(boolean inside, int yMin, int yMax, int uMin, int uMax, int vMin, int vMax) {
+	public YUVColorBound(boolean inside, int yMin, int yMax, int uMin, int uMax, int vMin, int vMax) {
 		super(inside, INCR, MAX);
 		this.yMin = yMin;
 		this.yMax = yMax;
@@ -18,6 +19,7 @@ public class HackColorBound extends MinMaxBound<Band> {
 		this.uMax = uMax;
 		this.vMin = vMin;
 		this.vMax = vMax;
+		Logger.EV3Log.format("Y: (%d,%d) U: (%d,%d) V: (%d,%d)", yMin, yMax, uMin, uMax, vMin, vMax);
 	}
 	
 	public final static int INCR = 5;
@@ -32,7 +34,7 @@ public class HackColorBound extends MinMaxBound<Band> {
 	}
 	
 	@Override
-	public void minUp(Band b) {
+	public void minUp(YUVBand b) {
 		switch (b) {
 		case Y: yMin = minPlus(yMin, yMax); break;
 		case U: uMin = minPlus(uMin, uMax); break;
@@ -41,7 +43,7 @@ public class HackColorBound extends MinMaxBound<Band> {
 	}
 	
 	@Override
-	public void minDown(Band b) {
+	public void minDown(YUVBand b) {
 		switch (b) {
 		case Y: yMin = minMinus(yMin); break;
 		case U: uMin = minMinus(uMin); break;
@@ -50,7 +52,7 @@ public class HackColorBound extends MinMaxBound<Band> {
 	}
 	
 	@Override
-	public void maxUp(Band b) {
+	public void maxUp(YUVBand b) {
 		switch (b) {
 		case Y: yMax = maxPlus(yMax); break;
 		case U: uMax = maxPlus(uMax); break;
@@ -59,7 +61,7 @@ public class HackColorBound extends MinMaxBound<Band> {
 	}
 	
 	@Override
-	public void maxDown(Band b) {
+	public void maxDown(YUVBand b) {
 		switch (b) {
 		case Y: yMax = maxMinus(yMax, yMin); break;
 		case U: uMax = maxMinus(uMax, uMin); break;
@@ -68,7 +70,7 @@ public class HackColorBound extends MinMaxBound<Band> {
 	}
 	
 	@Override
-	public int getMin(Band b) {
+	public int getMin(YUVBand b) {
 		switch (b) {
 		case Y: return yMin;
 		case U: return uMin;
@@ -77,7 +79,7 @@ public class HackColorBound extends MinMaxBound<Band> {
 	}
 	
 	@Override
-	public int getMax(Band b) {
+	public int getMax(YUVBand b) {
 		switch (b) {
 		case Y: return yMax;
 		case U: return uMax;

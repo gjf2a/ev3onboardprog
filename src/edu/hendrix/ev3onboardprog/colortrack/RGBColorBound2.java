@@ -1,44 +1,43 @@
 package edu.hendrix.ev3onboardprog.colortrack;
 
 import edu.hendrix.ev3onboardprog.vision.RGB;
+import lejos.hardware.video.YUYVImage;
 
-public class RGBColorBound extends MinMaxBound<RGB> {
-	public static final int MAX = 10;
-	public static final int CONVERT = 255 / MAX;
+public class RGBColorBound2 extends MinMaxBound<RGB> {
+	public static final int MAX = 0xFF;
 	
-	private int rMin = 0, rMax = 10, gMin = 0, gMax = 10, bMin = 0, bMax = 10;
-	private boolean inside;
-	
-	public HackColorBound makeYUV() {
-		return new HackColorBound(inside, 
-				getY(rMin, gMin, bMin), 
-				getY(rMax, gMax, bMax),
-				getU(rMin, gMin, bMin),
-				getU(rMax, gMax, bMax),
-				getV(rMin, gMin, bMin),
-				getV(rMax, gMax, bMax));
+	public static int clamp(int value) {
+		return Math.min(MAX, Math.max(0, value));
 	}
 	
-	// From https://en.wikipedia.org/wiki/YUV
+	private int rMin = 0, rMax = MAX, gMin = 0, gMax = MAX, bMin = 0, bMax = MAX;
 	
-	private static int formula(int r, int g, int b, int rc, int gc, int bc, int add) {
-		return ((CONVERT * (rc * r + gc * gc + bc * b) + 128) >> 8) + add;
+	public RGBColorBound2(boolean inside) {
+		super(inside, MAX / 10, MAX);
 	}
 	
-	public static int getY(int r, int g, int b) {
-		return formula(r, g, b, 66, 129, 25, 16);
+	static int getR(int c, int e) {
+		return clamp((298*c + 409*e + 128) >> 8);
 	}
 	
-	public static int getU(int r, int g, int b) {
-		return formula(r, g, b, -38, -74, 112, 128);
+	static int getG(int c, int d, int e) {
+		return clamp((298*c - 100*d - 208*e + 128) >> 8);
 	}
 	
-	public static int getV(int r, int g, int b) {
-		return formula(r, g, b, 112, -94, -18, 128);
+	static int getB(int c, int d) {
+		return clamp((298*c + 516*d + 128) >> 8);
 	}
 	
-	public RGBColorBound(boolean inside) {
-		super(inside, 1, MAX);
+	public boolean isOn(YUYVImage img, int x, int y) {
+		int c = (img.getY(x, y) & MAX) - 16;
+		int d = (img.getU(x, y) & MAX) - 128;
+		int e = (img.getV(x, y) & MAX) - 128;
+		
+		int r = getR(c, e);
+		int g = getG(c, d, e);
+		int b = getB(c, d);
+		
+		return isInside() == (rMin <= r && r <= rMax && gMin <= g && g <= gMax && bMin <= b && b <= bMax);
 	}
 	
 	@Override

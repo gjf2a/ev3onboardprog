@@ -1,7 +1,7 @@
 package edu.hendrix.ev3onboardprog.colortrack;
 
 import edu.hendrix.ev3onboardprog.Util;
-import edu.hendrix.ev3onboardprog.vision.Band;
+import edu.hendrix.ev3onboardprog.vision.YUVBand;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 
@@ -24,7 +24,7 @@ public class ColorSelector<E extends Enum<E>> {
 	
 	public void display() {
 		LCD.clear();
-		for (int i = 0; i < Band.values().length; i++) {
+		for (int i = 0; i < YUVBand.values().length; i++) {
 			E b = band.getEnumConstants()[i];
 			LCD.drawString(b + ":" + bound.getMin(b), 0, i * 2, current == i && isMin);
 			LCD.drawString(b + ":" + bound.getMax(b), 0, i * 2 + 1, current == i && !isMin);
@@ -37,7 +37,7 @@ public class ColorSelector<E extends Enum<E>> {
 			
 			Util.checkAndUse(Button.UP, () -> {
 				if (isMin) {
-					current = (current - 1 + Band.values().length) % Band.values().length;
+					current = (current - 1 + YUVBand.values().length) % YUVBand.values().length;
 				}
 				isMin = !isMin;
 				display();
@@ -45,7 +45,7 @@ public class ColorSelector<E extends Enum<E>> {
 			
 			Util.checkAndUse(Button.DOWN, () -> {
 				if (!isMin) {
-					current = (current + 1) % Band.values().length;
+					current = (current + 1) % YUVBand.values().length;
 				}
 				isMin = !isMin;
 				display();

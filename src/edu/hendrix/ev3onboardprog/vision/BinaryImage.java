@@ -2,7 +2,7 @@ package edu.hendrix.ev3onboardprog.vision;
 
 import java.util.BitSet;
 
-import edu.hendrix.ev3onboardprog.colortrack.HackColorBound;
+import edu.hendrix.ev3onboardprog.colortrack.YUVColorBound;
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.video.YUYVImage;
 
@@ -10,7 +10,7 @@ public class BinaryImage {
 	private BitSet bits;
 	private int width, height;
 	
-	public BinaryImage(YUYVImage img, HackColorBound filter) {
+	public BinaryImage(YUYVImage img, YUVColorBound filter) {
 		height = img.getHeight();
 		width = img.getWidth();
 		bits = new BitSet(img.getHeight() * img.getWidth());

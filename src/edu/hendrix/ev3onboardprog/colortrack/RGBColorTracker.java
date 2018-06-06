@@ -6,7 +6,7 @@ import edu.hendrix.ev3onboardprog.Util;
 import edu.hendrix.ev3onboardprog.vision.RGB;
 
 public class RGBColorTracker implements Runnable {
-	private RGBColorBound filter = new RGBColorBound(true);
+	private RGBColorBound1 filter = new RGBColorBound1(true);
 	
 	public void run() {
 		try {
