@@ -1,7 +1,9 @@
 package edu.hendrix.ev3onboardprog.reactive;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
+import edu.hendrix.ev3onboardprog.Counter;
 import edu.hendrix.ev3onboardprog.CyclesPerSecond;
 import edu.hendrix.ev3onboardprog.Move;
 import lejos.hardware.Button;
@@ -22,14 +24,22 @@ public class Controller implements Runnable {
 	
 	@Override
 	public void run() {
+		Counter row = new Counter();
+		Optional<Move> move = Optional.empty();
 		for (int i = 0; i < size(); i++) {
 			if (sensors.get(i).matches()) {
-				Move action = actions.get(i);
-				action.shortMove();
-				LCD.drawString(action.toString() + "           ", 0, 0);
-				return;
+				move = Optional.of(actions.get(i));
 			}
+			final int sensorInt = i + 1;
+			sensors.get(i).lastValue().ifPresent(v -> {
+				LCD.drawString(String.format("S%d: %5.2f        ", sensorInt, v), 0, row.get());
+				row.bump();
+			});
 		}
+		move.ifPresent(m -> {
+			m.shortMove();
+			LCD.drawString(m.toString() + "           ", 0, row.get());
+		});
 	}
 	
 	public void loop() {

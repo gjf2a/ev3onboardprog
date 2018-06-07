@@ -1,5 +1,7 @@
 package edu.hendrix.ev3onboardprog.reactive;
 
+import java.util.Optional;
+
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.port.Port;
 
@@ -16,6 +18,11 @@ public class DefaultSpec extends Spec {
 
 			@Override
 			public void close() {
+			}
+
+			@Override
+			public Optional<Float> lastValue() {
+				return Optional.empty();
 			}};
 	}
 
