@@ -27,16 +27,16 @@ public class SensorSpec extends Spec {
 	
 	public void nextSensor() {
 		sensor = RotateFuncs.nextChoice(sensor, Sensor.values());
-		fixTestValue();
+		fixOtherValues();
 	}
 	
 	public void prevSensor() {
 		sensor = RotateFuncs.prevChoice(sensor, Sensor.values());
-		fixTestValue();
+		fixOtherValues();
 	}
 	
-	private void fixTestValue() {
-		testValueIndex = Math.min(testValueIndex, sensor.targets().length - 1);
+	private void fixOtherValues() {
+		testValueIndex = 0;
 		op = sensor.preferredOp();
 	}
 	
