@@ -10,6 +10,10 @@ abstract public class Spec {
 		move = Move.FORWARD;
 	}
 	
+	public Spec(String moveStr) {
+		move = Move.valueOf(moveStr);
+	}
+	
 	public Move action() {
 		return move;
 	}

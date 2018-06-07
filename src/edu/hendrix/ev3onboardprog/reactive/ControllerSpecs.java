@@ -11,6 +11,24 @@ public class ControllerSpecs {
 	private Port[] ports = new Port[] {SensorPort.S1, SensorPort.S2, SensorPort.S3, SensorPort.S4, SensorPort.S4};
 	private int topicOuter = 0, topicInner = 0;
 	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < specs.length; i++) {
+			sb.append(specs[i].toString() + "\n");
+		}
+		return sb.toString();
+	}
+	
+	public static ControllerSpecs fromString(String src) {
+		ControllerSpecs specs = new ControllerSpecs();
+		String[] parts = src.split("\n");
+		for (int i = 0; i < specs.specs.length - 1; i++) {
+			specs.specs[i] = SensorSpec.fromString(parts[i]);
+		}
+		specs.specs[specs.specs.length - 1] = DefaultSpec.fromString(parts[specs.specs.length - 1]);
+		return specs;
+	}
+	
 	public void checkAndUse(Key button, Runnable action) {
 		Util.checkAndUse(button, () -> {
 			action.run();

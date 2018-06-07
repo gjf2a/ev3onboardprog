@@ -17,6 +17,10 @@ public class SensorSpec extends Spec {
 		this.testValueIndex = 0;
 	}
 	
+	private SensorSpec(String moveStr) {
+		super(moveStr);
+	}
+	
 	public void nextOp() {
 		op = RotateFuncs.nextChoice(op, Op.values());
 	}
@@ -86,5 +90,19 @@ public class SensorSpec extends Spec {
 		LCD.drawString(sensor.rep(), 5, row, highlight == 1);
 		LCD.drawString(op.rep(), 8, row, highlight == 2);
 		LCD.drawString(String.format("%4.1f", sensor.targets()[testValueIndex]), 10, row, highlight == 3);
+	}
+	
+	@Override
+	public String toString() {
+		return action().toString() + ";" + sensor.toString() + ";" + op.toString() + ";" + testValueIndex;
+	}
+	
+	public static SensorSpec fromString(String s) {
+		String[] parts = s.split(";"	);
+		SensorSpec spec = new SensorSpec(parts[0]);
+		spec.sensor = Sensor.valueOf(parts[1]);
+		spec.op = Op.valueOf(parts[2]);
+		spec.testValueIndex = Integer.parseInt(parts[3]);
+		return spec;
 	}
 }

@@ -1,16 +1,49 @@
 package edu.hendrix.ev3onboardprog.reactive;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import edu.hendrix.ev3onboardprog.Util;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 
 public class ControllerMaker {
 	public static void main(String[] args) {
-		ControllerSpecs specs = new ControllerSpecs();
+		ControllerSpecs specs = initialize();
 		do {
 			specify(specs);
 			execute(specs);
 		} while (Util.isYes("Try again"));
+		save(specs);	
+	}
+	
+	public static void save(ControllerSpecs specs) {
+		if (Util.isYes("Save")) {
+			try {
+				Util.stringToFile(new File(FILENAME), specs.toString());
+				LCD.drawString("Save complete", 0, 0);
+			} catch (IOException e) {
+				LCD.clear();
+				LCD.drawString("Save failed", 0, 0);
+			}
+			Util.waitForUser();
+		}
+	}
+	
+	public static final String FILENAME = "controller.txt";
+	
+	public static ControllerSpecs initialize() {
+		File fin = new File(FILENAME);
+		if (fin.exists()) {
+			try {
+				String src = Util.fileToString(fin);
+				return ControllerSpecs.fromString(src);
+			} catch (FileNotFoundException | IllegalArgumentException exc) {
+				// Intentionally left blank
+			}
+		}
+		return new ControllerSpecs();
 	}
 	
 	public static void specify(ControllerSpecs specs) {
