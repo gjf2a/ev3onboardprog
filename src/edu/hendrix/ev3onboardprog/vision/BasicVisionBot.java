@@ -2,6 +2,7 @@ package edu.hendrix.ev3onboardprog.vision;
 
 import java.io.IOException;
 
+import edu.hendrix.ev3onboardprog.CyclesPerSecond;
 import edu.hendrix.ev3onboardprog.Move;
 import lejos.hardware.BrickFinder;
 import lejos.hardware.Button;
@@ -23,27 +24,18 @@ abstract public class BasicVisionBot implements Runnable {
 	
 	public void run() {
 		try {
-			long frameCount = 0;
-			long start = System.currentTimeMillis();
+			CyclesPerSecond fps = new CyclesPerSecond();
 			while (Button.ESCAPE.isUp()) {
 				wc.grabFrame(frame);
-				frameCount += 1;
+				fps.bump();
 				proc(new YUYVImage(frame, WIDTH, HEIGHT));
 			}
-			long duration = System.currentTimeMillis() - start;
-			double secs = duration / 1000.0;
-			double fps = frameCount / secs;
+			fps.stop();
 			Move.allStop();
 			wc.close();
 			
 			while (Button.ESCAPE.isDown()) {}
-			LCD.clear();
-			LCD.drawString(frameCount + " frames", 0, 0);
-			LCD.drawString(String.format("%5.1f s", secs), 0, 1);
-			LCD.drawString(String.format("%4.2f fps", fps), 0, 2);
-			
-			while (Button.ESCAPE.isUp()) {}
-			while (Button.ESCAPE.isDown()) {}
+			fps.display();
 			
 		} catch (IOException exc) {
 			LCD.clear();

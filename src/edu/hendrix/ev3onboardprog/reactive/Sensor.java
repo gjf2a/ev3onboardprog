@@ -31,6 +31,11 @@ public enum Sensor implements Repped {
 		public String rep() {
 			return "NO";
 		}
+
+		@Override
+		public Op preferredOp() {
+			return Op.EQ;
+		}
 	},
 	SONAR {
 		@Override
@@ -48,6 +53,11 @@ public enum Sensor implements Repped {
 		public String rep() {
 			return "SO";
 		}
+
+		@Override
+		public Op preferredOp() {
+			return Op.LT;
+		}
 	},
 	BUMP {
 		@Override
@@ -58,7 +68,6 @@ public enum Sensor implements Repped {
 		@Override
 		public WrappedSensor getSensorObject(Port p, DoublePredicate test) {
 			EV3TouchSensor bumper = new EV3TouchSensor(p);
-			//Logger.EV3Log.format("Sensor.BUMP: test %s", test);
 			return new WrappedSensor(bumper, bumper, test);
 		}
 
@@ -66,8 +75,14 @@ public enum Sensor implements Repped {
 		public String rep() {
 			return "BP";
 		}
+
+		@Override
+		public Op preferredOp() {
+			return Op.EQ;
+		}
 	};
 	
 	abstract public float[] targets();
 	abstract public SensorRunner getSensorObject(Port p, DoublePredicate test);
+	abstract public Op preferredOp();
 }

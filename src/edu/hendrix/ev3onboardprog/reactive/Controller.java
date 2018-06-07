@@ -2,6 +2,7 @@ package edu.hendrix.ev3onboardprog.reactive;
 
 import java.util.ArrayList;
 
+import edu.hendrix.ev3onboardprog.CyclesPerSecond;
 import edu.hendrix.ev3onboardprog.Move;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
@@ -34,12 +35,16 @@ public class Controller implements Runnable {
 	public void loop() {
 		LCD.clear();
 		LCD.drawString("Starting...", 0, 0);
+		CyclesPerSecond fps = new CyclesPerSecond();
 		while (Button.ESCAPE.isUp()) {
 			run();
+			fps.bump();
 		}
+		fps.stop();
 		Move.allStop();
 		for (SensorRunner sensor: sensors) {
 			sensor.close();
 		}
+		fps.display();
 	}
 }
