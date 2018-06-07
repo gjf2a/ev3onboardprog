@@ -35,16 +35,16 @@ public class Controller implements Runnable {
 	public void loop() {
 		LCD.clear();
 		LCD.drawString("Starting...", 0, 0);
-		CyclesPerSecond fps = new CyclesPerSecond();
+		CyclesPerSecond cps = new CyclesPerSecond();
 		while (Button.ESCAPE.isUp()) {
 			run();
-			fps.bump();
+			cps.bump();
 		}
-		fps.stop();
+		cps.stop();
 		Move.allStop();
 		for (SensorRunner sensor: sensors) {
 			sensor.close();
 		}
-		fps.display();
+		//cps.display();
 	}
 }

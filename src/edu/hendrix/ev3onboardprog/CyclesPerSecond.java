@@ -39,7 +39,7 @@ public class CyclesPerSecond {
 		LCD.clear();
 		LCD.drawString(cycles + " frames", 0, 0);
 		LCD.drawString(String.format("%5.1f s", seconds()), 0, 1);
-		LCD.drawString(String.format("%5.2f fps", hz()), 0, 2);
+		LCD.drawString(String.format("%5.2f hz", hz()), 0, 2);
 		while (Button.ESCAPE.isUp()) {}
 		while (Button.ESCAPE.isDown()) {}
 	}
