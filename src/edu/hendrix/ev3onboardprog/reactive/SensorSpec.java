@@ -8,11 +8,21 @@ import lejos.hardware.port.Port;
 
 public class SensorSpec extends Spec {
 	private Sensor sensor;
+	private Op op;
 	private int testValueIndex;
 	
 	public SensorSpec() {
 		this.sensor = Sensor.NONE;
+		this.op = Op.EQ;
 		this.testValueIndex = 0;
+	}
+	
+	public void nextOp() {
+		op = RotateFuncs.nextChoice(op, Op.values());
+	}
+	
+	public void prevOp() {
+		op = RotateFuncs.prevChoice(op, Op.values());
 	}
 	
 	public void nextSensor() {
@@ -27,6 +37,7 @@ public class SensorSpec extends Spec {
 	
 	private void fixTestValue() {
 		testValueIndex = Math.min(testValueIndex, sensor.targets().length - 1);
+		op = sensor.preferredOp();
 	}
 	
 	public void nextValue() {
@@ -45,7 +56,7 @@ public class SensorSpec extends Spec {
 
 	@Override
 	public int numChoices() {
-		return 3;
+		return 4;
 	}
 
 	@Override
@@ -53,6 +64,7 @@ public class SensorSpec extends Spec {
 		switch (choice % numChoices()) {
 		case 0:  nextAction(); break;
 		case 1:  nextSensor(); break;
+		case 2:  nextOp();     break;
 		default: nextValue();
 		}
 	}
@@ -62,6 +74,7 @@ public class SensorSpec extends Spec {
 		switch (choice % numChoices()) {
 		case 0:  prevAction(); break;
 		case 1:  prevSensor(); break;
+		case 2:  prevOp();     break;
 		default: prevValue();
 		}
 	}
@@ -71,7 +84,7 @@ public class SensorSpec extends Spec {
 		LCD.drawString("S" + (row + 1), 0, row);
 		LCD.drawString(action().rep(), 3, row, highlight == 0);
 		LCD.drawString(sensor.rep(), 5, row, highlight == 1);
-		LCD.drawString(sensor.preferredOp().rep(), 8, row);
-		LCD.drawString(String.format("%4.1f", sensor.targets()[testValueIndex]), 10, row, highlight == 2);
+		LCD.drawString(op.rep(), 8, row, highlight == 2);
+		LCD.drawString(String.format("%4.1f", sensor.targets()[testValueIndex]), 10, row, highlight == 3);
 	}
 }
