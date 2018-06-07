@@ -41,7 +41,13 @@ public class Program {
 	}
 	
 	public void execute() {
-		moves.forAll(m -> m.longMove());
+		//moves.forAll(m -> m.longMove());
+		while (!moves.atStart()) {moves.moveLeft();}
+		do {
+			moves.moveRight();
+			display();
+			moves.getBefore().longMove();
+		} while (!moves.atEnd());
 		Move.allStop();
 	}
 	

@@ -52,6 +52,10 @@ public class ListZipper<T> {
 		left = new Node<T>(obj, left.next());
 	}
 	
+	public void replaceAfter(T obj) {
+		right = new Node<T>(obj, right.next());
+	}
+	
 	public void backspace() {
 		if (left != null) {
 			left = left.next();
