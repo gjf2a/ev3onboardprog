@@ -50,7 +50,7 @@ public class SensorSpec extends Spec {
 
 	@Override
 	public SensorRunner makeRunner(Port p) {
-		DoublePredicate pred = sensor.preferredOp().makePred(sensor.targets()[testValueIndex]);
+		DoublePredicate pred = op.makePred(sensor.targets()[testValueIndex]);
 		return sensor.getSensorObject(p, pred);
 	}
 
