@@ -27,7 +27,7 @@ public class Controller implements Runnable {
 		Counter row = new Counter();
 		Optional<Move> move = Optional.empty();
 		for (int i = 0; i < size(); i++) {
-			if (sensors.get(i).matches()) {
+			if (sensors.get(i).matches() && !move.isPresent()) {
 				move = Optional.of(actions.get(i));
 			}
 			final int sensorInt = i + 1;
