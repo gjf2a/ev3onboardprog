@@ -1,4 +1,6 @@
-package edu.hendrix.ev3onboardprog;
+package edu.hendrix.ev3onboardprog.ui;
+
+import edu.hendrix.ev3onboardprog.util.Util;
 
 public class RotateFuncs {
 	public static <E extends Enum<E>> E nextChoice(E en, E[] vals) {

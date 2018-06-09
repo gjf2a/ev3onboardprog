@@ -1,4 +1,4 @@
-package edu.hendrix.ev3onboardprog;
+package edu.hendrix.ev3onboardprog.util;
 
 import java.io.File;
 import java.io.FileWriter;

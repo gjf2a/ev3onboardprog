@@ -2,7 +2,7 @@ package edu.hendrix.ev3onboardprog.reactive;
 
 import java.util.function.DoublePredicate;
 
-import edu.hendrix.ev3onboardprog.RotateFuncs;
+import edu.hendrix.ev3onboardprog.ui.RotateFuncs;
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.port.Port;
 

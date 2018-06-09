@@ -1,5 +1,6 @@
 package edu.hendrix.ev3onboardprog;
 
+import edu.hendrix.ev3onboardprog.ui.RotateFuncs;
 import lejos.hardware.Button;
 import lejos.hardware.motor.Motor;
 import lejos.hardware.motor.NXTRegulatedMotor;

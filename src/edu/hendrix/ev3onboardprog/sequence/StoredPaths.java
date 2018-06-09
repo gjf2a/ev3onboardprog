@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import edu.hendrix.ev3onboardprog.StringList;
+import edu.hendrix.ev3onboardprog.ui.StringList;
 
 public class StoredPaths implements StringList<Program> {
 	private ArrayList<Program> paths = new ArrayList<>();

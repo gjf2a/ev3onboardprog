@@ -1,4 +1,4 @@
-package edu.hendrix.ev3onboardprog;
+package edu.hendrix.ev3onboardprog.ui;
 
 import lejos.hardware.lcd.LCD;
 

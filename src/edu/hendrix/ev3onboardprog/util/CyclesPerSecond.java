@@ -1,22 +1,22 @@
-package edu.hendrix.ev3onboardprog;
+package edu.hendrix.ev3onboardprog.util;
 
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 
 public class CyclesPerSecond {
-	private long start, duration;
+	private long start = 0, duration = 0;
 	private int cycles = 0;
-	
-	public CyclesPerSecond() {
-		start = System.currentTimeMillis();
-	}
 	
 	public void bump() {
 		cycles += 1;
 	}
 	
 	public void stop() {
-		duration = System.currentTimeMillis() - start;
+		duration += System.currentTimeMillis() - start;
+	}
+	
+	public void start() {
+		start = System.currentTimeMillis();
 	}
 	
 	public long duration() {

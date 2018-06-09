@@ -1,6 +1,6 @@
 package edu.hendrix.ev3onboardprog.reactive;
 
-import edu.hendrix.ev3onboardprog.Util;
+import edu.hendrix.ev3onboardprog.ui.UIFuncs;
 import lejos.hardware.Key;
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.port.Port;
@@ -30,7 +30,7 @@ public class ControllerSpecs {
 	}
 	
 	public void checkAndUse(Key button, Runnable action) {
-		Util.checkAndUse(button, () -> {
+		UIFuncs.checkAndUse(button, () -> {
 			action.run();
 			display();
 		});

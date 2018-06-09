@@ -1,4 +1,4 @@
-package edu.hendrix.ev3onboardprog;
+package edu.hendrix.ev3onboardprog.util;
 
 public class Counter {
 	private int n;

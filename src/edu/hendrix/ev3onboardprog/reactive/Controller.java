@@ -3,9 +3,9 @@ package edu.hendrix.ev3onboardprog.reactive;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import edu.hendrix.ev3onboardprog.Counter;
-import edu.hendrix.ev3onboardprog.CyclesPerSecond;
 import edu.hendrix.ev3onboardprog.Move;
+import edu.hendrix.ev3onboardprog.util.Counter;
+import edu.hendrix.ev3onboardprog.util.CyclesPerSecond;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 
@@ -46,6 +46,7 @@ public class Controller implements Runnable {
 		LCD.clear();
 		LCD.drawString("Starting...", 0, 0);
 		CyclesPerSecond cps = new CyclesPerSecond();
+		cps.start();
 		while (Button.ESCAPE.isUp()) {
 			run();
 			cps.bump();

@@ -1,4 +1,4 @@
-package edu.hendrix.ev3onboardprog;
+package edu.hendrix.ev3onboardprog.ui;
 
 public class IntRow extends Row<Integer> {
 	public IntRow(String prompt, int start, int update) {

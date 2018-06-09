@@ -4,7 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import edu.hendrix.ev3onboardprog.Util;
+import edu.hendrix.ev3onboardprog.ui.UIFuncs;
+import edu.hendrix.ev3onboardprog.util.Util;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 
@@ -14,12 +15,12 @@ public class ControllerMaker {
 		do {
 			specify(specs);
 			execute(specs);
-		} while (Util.isYes("Try again"));
+		} while (UIFuncs.isYes("Try again"));
 		save(specs);	
 	}
 	
 	public static void save(ControllerSpecs specs) {
-		if (Util.isYes("Save")) {
+		if (UIFuncs.isYes("Save")) {
 			try {
 				Util.stringToFile(new File(FILENAME), specs.toString());
 				LCD.drawString("Save complete", 0, 0);
@@ -27,7 +28,7 @@ public class ControllerMaker {
 				LCD.clear();
 				LCD.drawString("Save failed", 0, 0);
 			}
-			Util.waitForUser();
+			UIFuncs.waitForUser();
 		}
 	}
 	

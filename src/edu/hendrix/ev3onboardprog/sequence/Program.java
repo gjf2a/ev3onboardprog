@@ -1,8 +1,8 @@
 package edu.hendrix.ev3onboardprog.sequence;
 
 import edu.hendrix.ev3onboardprog.Move;
-import edu.hendrix.ev3onboardprog.ScreenSpot;
-import edu.hendrix.ev3onboardprog.Util;
+import edu.hendrix.ev3onboardprog.ui.ScreenSpot;
+import edu.hendrix.ev3onboardprog.ui.UIFuncs;
 import lejos.hardware.Key;
 import lejos.hardware.lcd.LCD;
 
@@ -101,7 +101,7 @@ public class Program {
 	}
 	
 	public void checkAndUse(Key button, Runnable action) {
-		Util.checkAndUse(button, () -> {
+		UIFuncs.checkAndUse(button, () -> {
 			action.run();
 			display();
 		});

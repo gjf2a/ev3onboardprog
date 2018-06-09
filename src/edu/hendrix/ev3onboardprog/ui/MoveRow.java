@@ -1,4 +1,6 @@
-package edu.hendrix.ev3onboardprog;
+package edu.hendrix.ev3onboardprog.ui;
+
+import edu.hendrix.ev3onboardprog.Move;
 
 public class MoveRow extends Row<Move> {
 	public MoveRow(String prompt) {

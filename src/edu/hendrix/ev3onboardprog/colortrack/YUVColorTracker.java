@@ -2,7 +2,7 @@ package edu.hendrix.ev3onboardprog.colortrack;
 
 import java.io.IOException;
 
-import edu.hendrix.ev3onboardprog.Util;
+import edu.hendrix.ev3onboardprog.ui.UIFuncs;
 import edu.hendrix.ev3onboardprog.vision.YUVBand;
 
 public class YUVColorTracker implements Runnable {
@@ -13,17 +13,17 @@ public class YUVColorTracker implements Runnable {
 			do {
 				ColorSelector<YUVBand> selector = new ColorSelector<>(filter, YUVBand.class);
 				selector.loop();
-				if (Util.isYes("Check color")) {
+				if (UIFuncs.isYes("Check color")) {
 					ShowFilter tracker = new ShowFilter(filter);
 					tracker.run();
 				}
-				if (Util.isYes("Run robot")) {
+				if (UIFuncs.isYes("Run robot")) {
 					FilterTracker tracker = new FilterTracker(filter);
 					tracker.run();
 				}
-			} while (Util.isYes("Try again"));
+			} while (UIFuncs.isYes("Try again"));
 		} catch (IOException exc) {
-			Util.reportAndQuit(exc);
+			UIFuncs.reportAndQuit(exc);
 		}
 	}
 	

@@ -1,6 +1,6 @@
 package edu.hendrix.ev3onboardprog.colortrack;
 
-import edu.hendrix.ev3onboardprog.Util;
+import edu.hendrix.ev3onboardprog.ui.UIFuncs;
 import edu.hendrix.ev3onboardprog.vision.YUVBand;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
@@ -35,7 +35,7 @@ public class ColorSelector<E extends Enum<E>> {
 		display();
 		while (Button.ENTER.isUp() && Button.ESCAPE.isUp()) {
 			
-			Util.checkAndUse(Button.UP, () -> {
+			UIFuncs.checkAndUse(Button.UP, () -> {
 				if (isMin) {
 					current = (current - 1 + YUVBand.values().length) % YUVBand.values().length;
 				}
@@ -43,7 +43,7 @@ public class ColorSelector<E extends Enum<E>> {
 				display();
 			});
 			
-			Util.checkAndUse(Button.DOWN, () -> {
+			UIFuncs.checkAndUse(Button.DOWN, () -> {
 				if (!isMin) {
 					current = (current + 1) % YUVBand.values().length;
 				}
@@ -51,7 +51,7 @@ public class ColorSelector<E extends Enum<E>> {
 				display();
 			});
 			
-			Util.checkAndUse(Button.LEFT, () -> {
+			UIFuncs.checkAndUse(Button.LEFT, () -> {
 				if (isMin) {
 					bound.minDown(getCurrent());
 				} else {
@@ -60,7 +60,7 @@ public class ColorSelector<E extends Enum<E>> {
 				display();
 			});
 			
-			Util.checkAndUse(Button.RIGHT, () -> {
+			UIFuncs.checkAndUse(Button.RIGHT, () -> {
 				if (isMin) {
 					bound.minUp(getCurrent());
 				} else {

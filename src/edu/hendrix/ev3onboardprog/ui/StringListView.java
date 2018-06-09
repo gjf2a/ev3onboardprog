@@ -1,4 +1,4 @@
-package edu.hendrix.ev3onboardprog;
+package edu.hendrix.ev3onboardprog.ui;
 
 import lejos.hardware.Button;
 import lejos.hardware.Key;
@@ -18,7 +18,7 @@ public class StringListView<T> {
 	}
 	
 	public void checkAndUse(Key button, Runnable action) {
-		Util.checkAndUse(button, () -> {
+		UIFuncs.checkAndUse(button, () -> {
 			action.run();
 			display();
 		});

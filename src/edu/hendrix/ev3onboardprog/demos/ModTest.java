@@ -1,6 +1,6 @@
 package edu.hendrix.ev3onboardprog.demos;
 
-import edu.hendrix.ev3onboardprog.Util;
+import edu.hendrix.ev3onboardprog.util.Util;
 
 public class ModTest {
 	public static void main(String[] args) {
