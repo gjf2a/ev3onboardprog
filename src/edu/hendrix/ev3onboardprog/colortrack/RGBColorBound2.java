@@ -12,6 +12,33 @@ public class RGBColorBound2 extends MinMaxBound<RGB> implements PixelFilter {
 	
 	private int rMin = 0, rMax = MAX, gMin = 0, gMax = MAX, bMin = 0, bMax = MAX;
 	
+	@Override
+	public String toString() {
+		return "R:(" + rMin + "," + rMax + ")\nG:(" + gMin + "," + gMax + ")\nB:(" + bMin + "," + bMax + ")";
+	}
+	
+	public RGBColorBound2(String src) {
+		this(true);
+		String[] lines = src.split("\n");
+		String[] rLine = lines[0].split(",");
+		String[] gLine = lines[1].split(",");
+		String[] bLine = lines[2].split(",");
+		rMin = findMin(rLine);
+		rMax = findMax(rLine);
+		gMin = findMin(gLine);
+		gMax = findMax(gLine);
+		bMin = findMin(bLine);
+		bMax = findMax(bLine);
+	}
+	
+	private static int findMin(String[] halves) {
+		return Integer.parseInt(halves[0].substring(3));
+	}
+	
+	private static int findMax(String[] halves) {
+		return Integer.parseInt(halves[1].substring(0, halves[1].indexOf(')')));
+	}
+	
 	public RGBColorBound2(boolean inside) {
 		super(inside, MAX / 10, MAX);
 	}
