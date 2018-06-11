@@ -24,50 +24,76 @@ public class ColorSelector<E extends Enum<E>> {
 	
 	public void display() {
 		LCD.clear();
+		drawBounds();
+	}
+	
+	public void drawBounds() {
 		for (int i = 0; i < YUVBand.values().length; i++) {
 			E b = band.getEnumConstants()[i];
-			LCD.drawString(b + ":" + bound.getMin(b), 0, i * 2, current == i && isMin);
-			LCD.drawString(b + ":" + bound.getMax(b), 0, i * 2 + 1, current == i && !isMin);
+			LCD.drawString(String.format("%c:(", b.toString().charAt(0)), 0, i);
+			LCD.drawString(String.format("%3d", bound.getMin(b)), 3, i, current == i && isMin);
+			LCD.drawString(",", 6, i);
+			LCD.drawString(String.format("%3d", bound.getMax(b)), 7, i, current == i && !isMin);
+			LCD.drawString(")", 10, i);
+		}		
+	}
+	
+	public void nextValue() {
+		if (!isMin) {
+			current = (current + 1) % YUVBand.values().length;
 		}
+		isMin = !isMin;
+	}
+	
+	public void prevValue() {
+		if (isMin) {
+			current = (current - 1 + YUVBand.values().length) % YUVBand.values().length;
+		}
+		isMin = !isMin;
+	}
+	
+	public void incValue() {
+		if (isMin) {
+			bound.minUp(getCurrent());
+		} else {
+			bound.maxUp(getCurrent());
+		}
+	}
+	
+	public void decValue() {
+		if (isMin) {
+			bound.minDown(getCurrent());
+		} else {
+			bound.maxDown(getCurrent());
+		}
+	}
+	
+	public void buttonChange() {
+		UIFuncs.checkAndUse(Button.LEFT, () -> {
+			prevValue();
+			display();
+		});
+		
+		UIFuncs.checkAndUse(Button.RIGHT, () -> {
+			nextValue();
+			display();
+		});
+		
+		UIFuncs.checkAndUse(Button.UP, () -> {
+			decValue();
+			display();
+		});
+		
+		UIFuncs.checkAndUse(Button.DOWN, () -> {
+			incValue();
+			display();
+		});
 	}
 	
 	public void loop() {
 		display();
 		while (Button.ENTER.isUp() && Button.ESCAPE.isUp()) {
-			
-			UIFuncs.checkAndUse(Button.UP, () -> {
-				if (isMin) {
-					current = (current - 1 + YUVBand.values().length) % YUVBand.values().length;
-				}
-				isMin = !isMin;
-				display();
-			});
-			
-			UIFuncs.checkAndUse(Button.DOWN, () -> {
-				if (!isMin) {
-					current = (current + 1) % YUVBand.values().length;
-				}
-				isMin = !isMin;
-				display();
-			});
-			
-			UIFuncs.checkAndUse(Button.LEFT, () -> {
-				if (isMin) {
-					bound.minDown(getCurrent());
-				} else {
-					bound.maxDown(getCurrent());
-				}
-				display();
-			});
-			
-			UIFuncs.checkAndUse(Button.RIGHT, () -> {
-				if (isMin) {
-					bound.minUp(getCurrent());
-				} else {
-					bound.maxUp(getCurrent());
-				}
-				display();
-			});
+			buttonChange();
 		}
 	}
 }

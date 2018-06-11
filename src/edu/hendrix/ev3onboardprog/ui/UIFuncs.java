@@ -43,4 +43,11 @@ public class UIFuncs {
 		System.exit(1);
 	}
 
+	public static void report(String string) {
+		LCD.clear();
+		LCD.drawString(string, 0, 0);
+		while (Button.ESCAPE.isUp());
+		while (Button.ESCAPE.isDown());
+	}
+
 }

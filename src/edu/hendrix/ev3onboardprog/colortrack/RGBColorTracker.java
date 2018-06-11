@@ -3,20 +3,16 @@ package edu.hendrix.ev3onboardprog.colortrack;
 import java.io.IOException;
 
 import edu.hendrix.ev3onboardprog.ui.UIFuncs;
-import edu.hendrix.ev3onboardprog.vision.RGB;
 
 public class RGBColorTracker implements Runnable {
 	private RGBColorBound2 filter = new RGBColorBound2(true);
 	
 	public void run() {
+		//UIFuncs.report(LCD.FONT_WIDTH + "," + LCD.SCREEN_WIDTH);
 		try {
 			do {
-				ColorSelector<RGB> selector = new ColorSelector<>(filter, RGB.class);
-				selector.loop();
-				if (UIFuncs.isYes("Check color")) {
-					ShowFilter tracker = new ShowFilter(filter);
-					tracker.run();
-				}
+				SelectShowFilter ssfilter = new SelectShowFilter(filter);
+				ssfilter.run();
 				if (UIFuncs.isYes("Run robot")) {
 					FilterTracker tracker = new FilterTracker(filter);
 					tracker.run();
