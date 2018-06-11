@@ -8,7 +8,6 @@ public class RGBColorTracker implements Runnable {
 	private RGBColorBound2 filter = new RGBColorBound2(true);
 	
 	public void run() {
-		//UIFuncs.report(LCD.FONT_WIDTH + "," + LCD.SCREEN_WIDTH);
 		try {
 			do {
 				SelectShowFilter ssfilter = new SelectShowFilter(filter);

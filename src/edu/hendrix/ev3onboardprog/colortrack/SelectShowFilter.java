@@ -26,7 +26,6 @@ public class SelectShowFilter extends BasicVisionBot {
 		selector.drawBounds();
 		BinaryImage bin = new BinaryImage(img, filter);
 		bin.drawIgnoring(0, LCD.FONT_WIDTH * 11, 0, LCD.FONT_HEIGHT * 3);
-		
 	}
 	
 	public void handleButtons() {
