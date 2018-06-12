@@ -52,7 +52,7 @@ public class BinaryImage {
 	public void draw() {
 		for (int y = 0; y < LCD.SCREEN_HEIGHT; y++) {
 			for (int x = 0; x < LCD.SCREEN_WIDTH; x++) {
-				LCD.setPixel(x, y, bits.get(ind(x, y)) ? 1 : 0);
+				LCD.setPixel(x, y, bitFor(x, y) ? 1 : 0);
 			}
 		}
 	}
@@ -61,7 +61,7 @@ public class BinaryImage {
 		for (int y = 0; y < LCD.SCREEN_HEIGHT; y++) {
 			for (int x = 0; x < LCD.SCREEN_WIDTH; x++) {
 				if (x < minX || x > maxX || y < minY || y > maxY) {
-					LCD.setPixel(x, y, bits.get(ind(x, y)) ? 1 : 0);
+					LCD.setPixel(x, y, bitFor(x, y) ? 1 : 0);
 				}
 			}
 		}

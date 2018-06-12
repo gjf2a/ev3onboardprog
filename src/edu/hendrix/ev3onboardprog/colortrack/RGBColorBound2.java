@@ -3,6 +3,9 @@ package edu.hendrix.ev3onboardprog.colortrack;
 import edu.hendrix.ev3onboardprog.vision.RGB;
 import lejos.hardware.video.YUYVImage;
 
+// Useful colors:
+// Orange: R:(175, 255) G: (75, 255) B: (0, 155)
+
 public class RGBColorBound2 extends MinMaxBound<RGB> implements PixelFilter {
 	public static final int MAX = 0xFF;
 	
