@@ -37,11 +37,11 @@ public class SelectShowFilter extends BasicVisionBot {
 			selector.nextValue();
 		});
 		
-		UIFuncs.checkAndUse(Button.UP, () -> {
+		UIFuncs.checkAndUse(Button.DOWN, () -> {
 			selector.decValue();
 		});
 		
-		UIFuncs.checkAndUse(Button.DOWN, () -> {
+		UIFuncs.checkAndUse(Button.UP, () -> {
 			selector.incValue();
 		});
 	}

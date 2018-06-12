@@ -2,7 +2,7 @@ package edu.hendrix.ev3onboardprog.colortrack;
 
 import java.io.IOException;
 
-import edu.hendrix.ev3onboardprog.Move;
+import edu.hendrix.ev3onboardprog.TrackMove;
 import edu.hendrix.ev3onboardprog.vision.BasicVisionBot;
 import edu.hendrix.ev3onboardprog.vision.BinaryImage;
 import edu.hendrix.ev3onboardprog.vision.Point;
@@ -28,11 +28,11 @@ public class FilterTracker extends BasicVisionBot {
 		bin.draw();
 		Point centroid = bin.centroid();
 		if (centroid.getX() < GO_LEFT) {
-			Move.LEFT.shortMove();
+			TrackMove.LEFT.move();
 		} else if (centroid.getX() > GO_RIGHT) {
-			Move.RIGHT.shortMove();
+			TrackMove.RIGHT.move();
 		} else {
-			Move.FORWARD.shortMove();
+			TrackMove.FORWARD.move();
 		}
 	}
 }

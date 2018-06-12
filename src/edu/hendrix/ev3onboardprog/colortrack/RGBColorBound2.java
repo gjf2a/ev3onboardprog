@@ -4,7 +4,11 @@ import edu.hendrix.ev3onboardprog.vision.RGB;
 import lejos.hardware.video.YUYVImage;
 
 // Useful colors:
-// Orange: R:(175, 255) G: (75, 255) B: (0, 155)
+// Orange: R:(125, 255) G:( 75, 255) B:(  0, 155)
+// Pink:   R:(100, 255) G:( 75, 155) B:(100, 205)
+// Yellow: R:(100, 255) G:(125, 255) B:(100, 255)
+// Red:    R:(100, 255) G:(100, 255) B:( 75, 255)
+
 
 public class RGBColorBound2 extends MinMaxBound<RGB> implements PixelFilter {
 	public static final int MAX = 0xFF;
