@@ -11,7 +11,7 @@ import lejos.hardware.video.YUYVImage;
 public class FilterTracker extends BasicVisionBot {
 	private PixelFilter filter;
 	
-	public final static double STRAIGHT_FRACTION = 0.20;
+	public final static double STRAIGHT_FRACTION = 0.40;
 	public final static double TURN_FRACTION = (1.0 - STRAIGHT_FRACTION) / 2;
 	public final static int TURN_PIXELS = (int)(BasicVisionBot.WIDTH * TURN_FRACTION);
 	public final static int GO_LEFT = TURN_PIXELS;

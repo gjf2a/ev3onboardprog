@@ -12,6 +12,10 @@ abstract public class MinMaxBound<E extends Enum<E>> {
 	
 	public boolean isInside() {return inside;}
 	
+	public void setInside(boolean inside) {this.inside = inside;}
+	
+	public void invertInside() {this.inside = !this.inside;}
+	
 	protected int minPlus(int min, int max) {
 		return Math.min(min + incr, max);
 	}

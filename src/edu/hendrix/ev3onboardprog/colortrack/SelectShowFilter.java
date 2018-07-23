@@ -44,5 +44,9 @@ public class SelectShowFilter extends BasicVisionBot {
 		UIFuncs.checkAndUse(Button.UP, () -> {
 			selector.incValue();
 		});
+		
+		UIFuncs.checkAndUse(Button.ENTER, () -> {
+			selector.invert();
+		});
 	}
 }

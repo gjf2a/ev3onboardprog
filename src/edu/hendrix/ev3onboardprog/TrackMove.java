@@ -8,8 +8,8 @@ public enum TrackMove implements Repped {
 	FORWARD {
 		@Override
 		public void move() {
-			Motor.A.setSpeed(300);
-			Motor.D.setSpeed(300);
+			Motor.A.setSpeed(FORWARD_SPEED);
+			Motor.D.setSpeed(FORWARD_SPEED);
 			Motor.A.forward();
 			Motor.D.forward();
 		}
@@ -22,8 +22,8 @@ public enum TrackMove implements Repped {
 	LEFT {
 		@Override
 		public void move() {
-			Motor.A.setSpeed(100);
-			Motor.D.setSpeed(100);
+			Motor.A.setSpeed(TURN_SPEED);
+			Motor.D.setSpeed(TURN_SPEED);
 			Motor.D.forward();
 			Motor.A.backward();			
 		}
@@ -36,8 +36,8 @@ public enum TrackMove implements Repped {
 	RIGHT {
 		@Override
 		public void move() {
-			Motor.A.setSpeed(100);
-			Motor.D.setSpeed(100);
+			Motor.A.setSpeed(TURN_SPEED);
+			Motor.D.setSpeed(TURN_SPEED);
 			Motor.A.forward();
 			Motor.D.backward();
 		}
@@ -45,6 +45,20 @@ public enum TrackMove implements Repped {
 		@Override
 		public String rep() {
 			return "R";
+		}
+	},
+	BACK {
+		@Override
+		public void move() {
+			Motor.A.setSpeed(FORWARD_SPEED);
+			Motor.D.setSpeed(FORWARD_SPEED);
+			Motor.A.backward();
+			Motor.D.backward();
+		}
+		
+		@Override
+		public String rep() {
+			return "B";
 		}
 	};
 	
@@ -62,4 +76,7 @@ public enum TrackMove implements Repped {
 		Motor.A.stop(true);
 		Motor.D.stop();
 	}
+	
+	public static final int TURN_SPEED = 50;
+	public static final int FORWARD_SPEED = 300;
 }

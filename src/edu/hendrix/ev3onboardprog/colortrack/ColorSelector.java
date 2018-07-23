@@ -35,7 +35,7 @@ public class ColorSelector<E extends Enum<E>> {
 			LCD.drawString(",", 6, i);
 			LCD.drawString(String.format("%3d", bound.getMax(b)), 7, i, current == i && !isMin);
 			LCD.drawString(")", 10, i);
-		}		
+		}
 	}
 	
 	public void nextValue() {
@@ -68,6 +68,10 @@ public class ColorSelector<E extends Enum<E>> {
 		}
 	}
 	
+	public void invert() {
+		bound.invertInside();
+	}
+	
 	public void buttonChange() {
 		UIFuncs.checkAndUse(Button.LEFT, () -> {
 			prevValue();
@@ -79,12 +83,12 @@ public class ColorSelector<E extends Enum<E>> {
 			display();
 		});
 		
-		UIFuncs.checkAndUse(Button.UP, () -> {
+		UIFuncs.checkAndUse(Button.DOWN, () -> {
 			decValue();
 			display();
 		});
 		
-		UIFuncs.checkAndUse(Button.DOWN, () -> {
+		UIFuncs.checkAndUse(Button.UP, () -> {
 			incValue();
 			display();
 		});
